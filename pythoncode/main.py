@@ -18,7 +18,8 @@ import os
 # c.go_to_school("junior")
 # c.info()
 # print("------eat")
-path = os.path.abspath(os.path.join(os.getcwd(), "../my_yaml/"))
+
+path = os.path.join(os.path.abspath("."), "my_yaml")
 
 with open(os.path.join(path,"xiaohai.yaml"),"r") as f:
     xiaohai = yaml.load(f,Loader=yaml.Loader)
