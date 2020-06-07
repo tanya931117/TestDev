@@ -6,11 +6,14 @@
 # @Software: PyCharm
 from pythoncode.my_obj.person import person
 
-
 class adult(person):
     def __init__(self,name,age,high,weight,work):
         super(adult, self).__init__(name,age,high,weight)
         self.work=work
 
-    def work(self,work):
+    def go_to_work(self,work):
         print(f"my work is {self.work},i should {work}")
+
+    def info(self):
+        super(adult, self).info()
+        print(f"my work is {self.work}")

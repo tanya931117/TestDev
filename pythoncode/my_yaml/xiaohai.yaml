@@ -1,0 +1,9 @@
+name: xiaohai
+age: 30
+high: 175
+weight: 65
+work: tester
+works:
+- test software
+- write test report
+- report bugs

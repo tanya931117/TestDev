@@ -16,6 +16,9 @@ class children(person):
         self.school=school
         print(f"i will go to school, {school}")
 
+    def go_to_class(self,course):
+        print(f"i should go to {course}")
+
     def info(self):
         super(children, self).info()
         print(f"my school is {self.school}")
