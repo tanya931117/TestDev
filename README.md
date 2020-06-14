@@ -1,11 +1,21 @@
 # TestDev
 ## pytest实战二 课后作业
 
-见pythoncode/homework/check_cal.py和pythoncode/homework/check_cal1.py
+见以下： 
+
+pythoncode/homework/check_cal.py 
+
+pythoncode/homework/check_cal1.py 
+
+pythoncode/homework/conftest.py
 
 ## pytest实战一 课后作业
 
-见pythoncode/homework/test_cal.py
+见以下：
+
+pythoncode/homework/test_cal.py 
+
+pythoncode/homework/conftest.py
 
 ## 函数返回值
 - 有返回值 
