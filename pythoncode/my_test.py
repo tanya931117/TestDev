@@ -7,17 +7,25 @@
 import time
 
 import allure
+import pytest
+import yaml
 from selenium import webdriver
 
-# browser = webdriver.Chrome("D:\\chromedriver.exe")
-# browser.maximize_window()
-# browser.get("https://www.baidu.com")
-# search_input_element = browser.find_element_by_id("kw")
-# search_input_element.send_keys("test")
-# search_element = browser.find_element_by_id("su")
-# search_element.click()
-# time.sleep(5)
-# file_path = "../image/test_search_test.png"
-# browser.save_screenshot(file_path)
-# # allure.attach.file(source=file_path, name="screentshot", attachment_type=allure.attachment_type.PNG)
-# browser.quit()
+def get_params(path):
+    with open(path,"r") as f:
+        params = yaml.safe_load(f)
+    res = []
+    for param in params:
+        values = param[:-2]
+        dependency_name = param[-2]
+        depend = param[-1]
+        if depend :
+            res.append(pytest.param(*values,marks=pytest.mark.dependency(name=dependency_name,depends=depend)))
+        else:
+            res.append(pytest.param(*values, marks=pytest.mark.dependency(name=dependency_name)))
+    return res
+
+if __name__=="__main__":
+    # pytest.param(1, 2, marks=pytest.mark.dependency(name="b1", depends=["a1", "a2"]))
+    file_path = "/pythoncode/my_yaml/test/subtract_case.yml"
+    print(get_params(file_path))

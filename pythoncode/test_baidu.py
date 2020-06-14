@@ -40,7 +40,7 @@ class TestBaidu():
         print("my_fixture")
 
     @allure.story("搜索")
-    @pytest.mark.parametrize("kws",yaml.safe_load(open("./my_yaml/baidu_yaml.yml","r")))
+    @pytest.mark.parametrize("kws", yaml.safe_load(open("my_yaml/test/baidu_yaml.yml", "r")))
     def test_search(self,kws,my_fixture):
         with allure.step("打开浏览器"):
             browser = webdriver.Chrome("D:\\chromedriver.exe")
