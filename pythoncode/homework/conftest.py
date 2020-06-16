@@ -36,6 +36,9 @@ path = os.path.join(root_path, "my_yaml")
 def pytest_generate_tests(metafunc):
     if "print_cal" in metafunc.fixturenames:
         enviroment = metafunc.config.getoption("env")
-        param = metafunc.cls.func_params[metafunc.function.__name__]
-        # @pytest.mark.parametrize("value1,value2,check",get_params(os.path.join(path,"add_case.yml")))
-        metafunc.parametrize(param[0], metafunc.cls.get_params(os.path.join(path,enviroment,param[1])))
+        try:
+            param = metafunc.cls.func_params[metafunc.function.__name__]
+            # @pytest.mark.parametrize("value1,value2,check",get_params(os.path.join(path,"add_case.yml")))
+            metafunc.parametrize(param[0], metafunc.cls.get_params(os.path.join(path,enviroment,param[1])))
+        except:
+            pass
