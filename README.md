@@ -1,4 +1,9 @@
 # TestDev
+## 企业微信实战一 课后作业
+
+见以下： 
+
+pythoncode/homework/test_weixin_login.py
 ## pytest实战二 课后作业
 
 见以下： 
