@@ -5,13 +5,7 @@
 # @File    : conftest.py
 # @Software: PyCharm
 import os
-
 import pytest
-import yaml
-
-from pythoncode.homework.my_config import conf
-from pluggy import HookspecMarker
-
 from pythoncode.my_utils.get_path import get_root_Path
 
 
@@ -19,6 +13,7 @@ from pythoncode.my_utils.get_path import get_root_Path
 def print_cal():
     print("开始计算")
     yield print("计算结束")
+
 
 def pytest_addoption(parser):
     group = parser.getgroup("my_args_group")
@@ -34,11 +29,14 @@ root_path = get_root_Path()
 path = os.path.join(root_path, "my_yaml")
 
 def pytest_generate_tests(metafunc):
-    if "print_cal" in metafunc.fixturenames:
+    if ("print_cal" in metafunc.fixturenames) or ("start_selenium" in metafunc.fixturenames):
         enviroment = metafunc.config.getoption("env")
         try:
             param = metafunc.cls.func_params[metafunc.function.__name__]
             # @pytest.mark.parametrize("value1,value2,check",get_params(os.path.join(path,"add_case.yml")))
+            tmp = metafunc.cls.get_params(os.path.join(path, enviroment, param[1]))
             metafunc.parametrize(param[0], metafunc.cls.get_params(os.path.join(path,enviroment,param[1])))
         except:
             pass
+    else:
+        pass

@@ -1,4 +1,12 @@
 # TestDev
+
+## 企业微信实战二 课后作业
+
+见以下： 
+
+pythoncode/homework/test_add_member.py 
+
+pythoncode/homework/test_import_contact.py
 ## 企业微信实战一 课后作业
 
 见以下： 
