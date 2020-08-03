@@ -1,34 +1,40 @@
 # TestDev
 
+## 企业微信-接口测试实战1 课后作业
+
+见以下： 
+
+pythoncode/homework_api/test_contact.py 
+
 ## 企业微信实战二 课后作业
 
 见以下： 
 
-pythoncode/homework/test_add_member.py 
+pythoncode/homework_selenium/test_add_member.py 
 
-pythoncode/homework/test_import_contact.py
+pythoncode/homework_selenium/test_import_contact.py
 ## 企业微信实战一 课后作业
 
 见以下： 
 
-pythoncode/homework/test_weixin_login.py
+pythoncode/homework_selenium/test_weixin_login.py
 ## pytest实战二 课后作业
 
 见以下： 
 
-pythoncode/homework/check_cal.py 
+pythoncode/homework_selenium/check_cal.py 
 
-pythoncode/homework/check_cal1.py 
+pythoncode/homework_selenium/check_cal1.py 
 
-pythoncode/homework/conftest.py
+pythoncode/homework_selenium/conftest.py
 
 ## pytest实战一 课后作业
 
 见以下：
 
-pythoncode/homework/test_cal.py 
+pythoncode/homework_selenium/test_cal.py 
 
-pythoncode/homework/conftest.py
+pythoncode/homework_selenium/conftest.py
 
 ## 函数返回值
 - 有返回值 
