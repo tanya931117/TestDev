@@ -16,7 +16,6 @@ from pythoncode.my_utils import get_path
 
 root_path = get_path.get_root_Path()
 
-@pytest.mark.usefixtures("start_case")
 class TestContact:
 
     #企业ID：ww0c8f13621be7beef
@@ -108,6 +107,7 @@ class TestContact:
         print(response.status_code)
         print(response.content)
 
+    @pytest.mark.skip
     def test_del_member(self):
         url = "https://qyapi.weixin.qq.com/cgi-bin/user/delete"
         data = {
