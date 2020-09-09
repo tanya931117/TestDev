@@ -14,6 +14,8 @@ from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+
+from pythoncode.PO.work_weixin_login import WorkWeixinLogin
 from pythoncode.my_utils.get_path import get_root_Path
 
 
@@ -24,16 +26,17 @@ class TestLoginReuse():
     def set_driver_debug(self):
         opt = Options()
         opt.debugger_address="localhost:9333"
-        self.driver = webdriver.Chrome(executable_path="D:\\workspace\\pyworkspace\\chromedriver.exe",options=opt)
+        self.driver = webdriver.Chrome(executable_path="D:\\workspace\\pyworkspace\\chromedriver850418383.exe",options=opt)
         yield
         self.driver.quit()
 
     @pytest.fixture()
     def set_driver_cookie(self):
-        self.driver = webdriver.Chrome("D:\\workspace\\pyworkspace\\chromedriver.exe")
+        self.driver = webdriver.Chrome("D:\\workspace\\pyworkspace\\chromedriver850418383.exe")
         yield
         self.driver.quit()
 
+    @pytest.mark.skip
     def test_login_debug(self,set_driver_debug):
         self.driver.get("https://work.weixin.qq.com/wework_admin/frame#contacts")
         element_index = WebDriverWait(self.driver,10).until(expected_conditions.element_to_be_clickable((By.ID,"menu_index")))
@@ -58,4 +61,6 @@ class TestLoginReuse():
             if element_index is not None:
                 break
         assert True
+
+
 

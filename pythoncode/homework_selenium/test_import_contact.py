@@ -12,6 +12,7 @@ from selenium import webdriver
 from selenium.webdriver.chrome.options import Options
 
 from pythoncode.PO.work_weixin_index import WorkWeixinIndex
+from pythoncode.PO.work_weixin_login import WorkWeixinLogin
 from pythoncode.my_utils import get_path
 
 @pytest.mark.usefixtures("print_cal")
@@ -28,33 +29,32 @@ class TestImportContact():
 
     @pytest.fixture(autouse=True)
     def start_selenium(self):
-        print("debug")
-        opt = Options()
-        opt.debugger_address = "localhost:9444"
-        self.driver = webdriver.Chrome(executable_path="D:\\workspace\\pyworkspace\\chromedriver.exe", options=opt)
+        # print("debug")
+        # opt = Options()
+        # opt.debugger_address = "localhost:9444"
+        # self.driver = webdriver.Chrome(executable_path="D:\\workspace\\pyworkspace\\chromedriver850418383.exe", options=opt)
         # self.driver.get("https://work.weixin.qq.com/wework_admin/frame#contacts")
+        # self.driver = webdriver.Chrome(executable_path="D:\\workspace\\pyworkspace\\chromedriver850418383.exe")
+        self.index = WorkWeixinLogin().login()
         yield
-        self.driver.quit()
+        self.index.close()
 
     def test_index_import_empty(self,file_name):
         root = get_path.get_root_Path()
         file_path = os.path.join(root,file_name)
-        title = WorkWeixinIndex(self.driver).import_contact().upload_empty(file_path)
+        title = self.index.import_contact().upload_empty(file_path)
         assert title=="通讯录上传未成功"
 
     def test_index_import(self,file_name,check_data):
         root = get_path.get_root_Path()
         file_path = os.path.join(root,file_name)
-        mems = WorkWeixinIndex(self.driver).import_contact().upload(file_path).get_member()
-        for mem in mems:
-            if mem[0] == check_data[0]:
-                assert True
-                break
-        else:
-            assert False
+        mems = self.index.import_contact().upload(file_path).get_member()
+        names = [mem[0] for mem in mems]
+        check_names = [data[0] for data in check_data]
+        assert set(check_names).issubset(set(names))
 
     def test_index_import_unvalid(self,file_name):
         root = get_path.get_root_Path()
         file_path = os.path.join(root,file_name)
-        text = WorkWeixinIndex(self.driver).import_contact().upload_unvalid(file_path)
+        text = self.index.import_contact().upload_unvalid(file_path)
         assert text=="将文件拖拽至此区域"

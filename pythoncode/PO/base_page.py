@@ -4,13 +4,17 @@
 # @Author  : tanya
 # @File    : base_page.py
 # @Software: PyCharm
+import configparser
 import json
+import os
 
 from selenium import webdriver
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions
 from selenium.webdriver.support.wait import WebDriverWait
+
+from pythoncode.my_utils.get_path import get_root_Path
 
 
 class BasePage():
@@ -24,7 +28,7 @@ class BasePage():
     tag_name = By.TAG_NAME
 
     _base_url=""
-    def __init__(self,driver:WebDriver):
+    def __init__(self,driver:WebDriver=None):
         """
         初始化PO的driver
         :param driver:
@@ -32,7 +36,7 @@ class BasePage():
         self._driver = None
         #若传入的driver为空，则初始化一个driver
         if driver is None:
-            self._driver = webdriver.Chrome("D:\\workspace\\pyworkspace\\chromedriver.exe")
+            self._driver = webdriver.Chrome(self.get_config())
         #否则使用传入的driver
         else:
             self._driver = driver
@@ -41,6 +45,15 @@ class BasePage():
             self._driver.get(self._base_url)
         #隐式等待1秒
         self._driver.implicitly_wait(1)
+
+    def get_config(self):
+        config = configparser.ConfigParser()  # 类实例化
+        # 定义文件路径
+        root_path = get_root_Path()
+        path = os.path.join(root_path, "homework_selenium","iSelenium.ini")
+        config.read(path)
+        driver_path = config["driver"]["chrome_driver"]
+        return driver_path
 
     def find(self,by,locator):
         """
@@ -126,3 +139,5 @@ class BasePage():
         """
         return WebDriverWait(self._driver, seconds).until(method=method)
 
+    def close(self):
+        self._driver.quit()

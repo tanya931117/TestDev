@@ -8,8 +8,6 @@ import os
 import pytest
 import yaml
 from pythoncode.my_utils.calcutor import add,subtract,multiply,divide
-from pythoncode.my_utils.get_path import get_root_Path
-from pythoncode.homework_selenium.my_config import conf
 
 
 
