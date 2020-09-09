@@ -9,6 +9,7 @@ import json
 import os
 
 from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
 from selenium.webdriver.common.by import By
 from selenium.webdriver.remote.webdriver import WebDriver
 from selenium.webdriver.support import expected_conditions
@@ -36,7 +37,16 @@ class BasePage():
         self._driver = None
         #若传入的driver为空，则初始化一个driver
         if driver is None:
-            self._driver = webdriver.Chrome(self.get_config())
+            try:
+                using_headless=os.environ["using_headless"]
+            except KeyError:
+                using_headless=None
+                print("未配置环境变量using_headless，按照有界面方式运行UI自动化测试")
+            options = Options()
+            if using_headless is not None and using_headless.lower()=="true":
+                print("使用无界面方式运行")
+                options.add_argument("--headless")
+            self._driver = webdriver.Chrome(self.get_config(),options=options)
         #否则使用传入的driver
         else:
             self._driver = driver

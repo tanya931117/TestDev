@@ -32,7 +32,16 @@ class TestLoginReuse():
 
     @pytest.fixture()
     def set_driver_cookie(self):
-        self.driver = webdriver.Chrome("D:\\workspace\\pyworkspace\\chromedriver850418383.exe")
+        try:
+            using_headless = os.environ["using_headless"]
+        except KeyError:
+            using_headless = None
+            print("未配置环境变量using_headless，按照有界面方式运行UI自动化测试")
+        options = Options()
+        if using_headless is not None and using_headless.lower() == "true":
+            print("使用无界面方式运行")
+            options.add_argument("--headless")
+        self.driver = webdriver.Chrome("D:\\workspace\\pyworkspace\\chromedriver850418383.exe",options=options)
         yield
         self.driver.quit()
 

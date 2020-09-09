@@ -59,3 +59,6 @@ class MyTest():
     def test_add_member(self):
         members = WorkWeixinIndex(self.driver).add_member().add_member("银赫","eunhyuk","13500000000").get_member()
         print(members)
+
+if __name__=="__main__":
+    print(os.environ["using_headless"])
